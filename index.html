@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ItemBelanja - Solusi Kasir Digital Cepat & Mudah</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for cart */
+        .cart-scroll::-webkit-scrollbar {
+            width: 6px;
+        }
+        .cart-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        .cart-scroll::-webkit-scrollbar-thumb {
+            background: #c1c1c1; 
+            border-radius: 4px;
+        }
+        .cart-scroll::-webkit-scrollbar-thumb:hover {
+            background: #a8a8a8; 
+        }
+        
+        /* Fade in animation */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-200 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 bg-brand-600 rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-brand-500/30">
+                        i
+                    </div>
+                    <span class="font-bold text-xl tracking-tight text-slate-900">ItemBelanja</span>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#beranda" class="text-slate-600 hover:text-brand-600 font-medium transition">Beranda</a>
+                    <a href="#demo-pos" class="text-slate-600 hover:text-brand-600 font-medium transition">Demo Kasir</a>
+                    <a href="#harga" class="text-slate-600 hover:text-brand-600 font-medium transition">Harga</a>
+                    <a href="#demo-pos" class="bg-brand-600 hover:bg-brand-700 text-white px-5 py-2 rounded-full font-medium transition shadow-md shadow-brand-500/20">Coba Gratis</a>
+                </div>
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button class="text-slate-600 hover:text-brand-600 focus:outline-none">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden relative">
+        <!-- Background decoration -->
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl overflow-hidden -z-10">
+            <div class="absolute -top-40 -right-40 w-96 h-96 bg-brand-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+            <div class="absolute top-40 -left-20 w-72 h-72 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="text-center max-w-3xl mx-auto">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-50 text-brand-600 text-sm font-semibold mb-6 border border-brand-100">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-500"></span>
+                    </span>
+                    Rilis Versi Beta 1.0
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 tracking-tight leading-tight mb-6">
+                    Solusi Kasir Digital <br class="hidden sm:block" /> 
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-blue-400">Cepat & Mudah</span>
+                </h1>
+                <p class="text-lg md:text-xl text-slate-600 mb-10">
+                    Tinggalkan pencatatan manual. ItemBelanja membantu UMKM mencatat transaksi, menghitung kembalian, dan mengelola toko dari satu layar. Langsung jalan di browsermu!
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#demo-pos" class="bg-brand-600 hover:bg-brand-700 text-white px-8 py-3.5 rounded-full font-semibold text-lg transition shadow-lg shadow-brand-500/30 flex items-center justify-center gap-2">
+                        <i class="fas fa-play text-sm"></i> Coba Demo Sekarang
+                    </a>
+                    <a href="#harga" class="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 px-8 py-3.5 rounded-full font-semibold text-lg transition flex items-center justify-center gap-2">
+                        Lihat Paket
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- POS Prototype Section -->
+    <section id="demo-pos" class="py-20 bg-white border-y border-slate-100 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Live Demo Prototipe Kasir</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Silakan coba menambahkan barang, melihat subtotal, dan melakukan simulasi pembayaran. Semua data diproses langsung di peramban (browser) Anda menggunakan arsitektur OOP JavaScript.</p>
+            </div>
+
+            <!-- POS Application UI -->
+            <div class="bg-slate-50 border border-slate-200 rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row h-[700px] lg:h-[600px]">
+                
+                <!-- Left Panel: Products & Input -->
+                <div class="w-full lg:w-3/5 p-6 flex flex-col h-1/2 lg:h-full border-b lg:border-b-0 lg:border-r border-slate-200 bg-white">
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2"><i class="fas fa-box-open mr-2 text-brand-500"></i>Katalog Produk</h3>
+                    
+                    <!-- Quick Add Products (Catalog) -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6">
+                        <button onclick="posApp.addToCart('Kopi Susu Gula Aren', 18000)" class="bg-slate-50 border border-slate-200 p-4 rounded-xl hover:border-brand-500 hover:bg-brand-50 transition text-left group">
+                            <div class="text-2xl mb-2 text-amber-700"><i class="fas fa-mug-hot"></i></div>
+                            <div class="font-semibold text-slate-800 text-sm mb-1 group-hover:text-brand-700">Kopi Susu Gula Aren</div>
+                            <div class="text-brand-600 font-bold text-sm">Rp 18.000</div>
+                        </button>
+                        <button onclick="posApp.addToCart('Roti Bakar Coklat', 15000)" class="bg-slate-50 border border-slate-200 p-4 rounded-xl hover:border-brand-500 hover:bg-brand-50 transition text-left group">
+                            <div class="text-2xl mb-2 text-orange-600"><i class="fas fa-bread-slice"></i></div>
+                            <div class="font-semibold text-slate-800 text-sm mb-1 group-hover:text-brand-700">Roti Bakar Coklat</div>
+                            <div class="text-brand-600 font-bold text-sm">Rp 15.000</div>
+                        </button>
+                        <button onclick="posApp.addToCart('Air Mineral', 5000)" class="bg-slate-50 border border-slate-200 p-4 rounded-xl hover:border-brand-500 hover:bg-brand-50 transition text-left group">
+                            <div class="text-2xl mb-2 text-blue-500"><i class="fas fa-bottle-water"></i></div>
+                            <div class="font-semibold text-slate-800 text-sm mb-1 group-hover:text-brand-700">Air Mineral</div>
+                            <div class="text-brand-600 font-bold text-sm">Rp 5.000</div>
+                        </button>
+                    </div>
+
+                    <!-- Custom Item Input -->
+                    <h3 class="text-lg font-bold text-slate-800 mb-4 border-b pb-2"><i class="fas fa-keyboard mr-2 text-brand-500"></i>Input Manual</h3>
+                    <form id="custom-item-form" class="space-y-4">
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <div class="flex-1">
+                                <label class="block text-xs font-medium text-slate-500 mb-1">Nama Barang</label>
+                                <input type="text" id="item-name" placeholder="Cth: Kerupuk Udang" required class="w-full border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm transition">
+                            </div>
+                            <div class="flex-1">
+                                <label class="block text-xs font-medium text-slate-500 mb-1">Harga (Rp)</label>
+                                <input type="number" id="item-price" placeholder="Cth: 2000" min="0" required class="w-full border border-slate-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 text-sm transition">
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-medium py-2.5 rounded-lg transition text-sm flex items-center justify-center gap-2">
+                            <i class="fas fa-plus"></i> Tambah ke Keranjang
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Right Panel: Cart & Checkout -->
+                <div class="w-full lg:w-2/5 flex flex-col h-1/2 lg:h-full bg-slate-50">
+                    <div class="p-6 pb-2 border-b border-slate-200 flex justify-between items-center bg-white">
+                        <h3 class="text-lg font-bold text-slate-800"><i class="fas fa-shopping-cart mr-2 text-brand-500"></i>Keranjang</h3>
+                        <button onclick="posApp.clearCart()" class="text-xs text-red-500 hover:text-red-700 font-medium hover:underline flex items-center gap-1">
+                            <i class="fas fa-trash-alt"></i> Kosongkan
+                        </button>
+                    </div>
+                    
+                    <!-- Cart Items -->
+                    <div id="cart-items" class="flex-1 overflow-y-auto p-4 cart-scroll space-y-3">
+                        <!-- Items will be rendered here by JS -->
+                        <div class="flex flex-col items-center justify-center h-full text-slate-400 text-center">
+                            <i class="fas fa-shopping-basket text-4xl mb-3 opacity-50"></i>
+                            <p class="text-sm">Keranjang masih kosong.<br>Pilih produk di sebelah kiri.</p>
+                        </div>
+                    </div>
+
+                    <!-- Checkout Section -->
+                    <div class="p-6 bg-white border-t border-slate-200">
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="text-slate-500 font-medium">Subtotal</span>
+                            <span id="cart-total" class="text-xl font-bold text-slate-900">Rp 0</span>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-xs font-medium text-slate-500 mb-1">Uang Diterima (Rp)</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-400 text-sm">Rp</span>
+                                <input type="number" id="payment-amount" placeholder="0" class="w-full border border-slate-300 rounded-lg pl-10 pr-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-brand-500 focus:border-brand-500 font-semibold text-lg transition">
+                            </div>
+                        </div>
+
+                        <div id="change-container" class="hidden mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="flex justify-between items-center text-green-800">
+                                <span class="font-medium text-sm">Kembalian</span>
+                                <span id="change-amount" class="text-lg font-bold">Rp 0</span>
+                            </div>
+                        </div>
+
+                        <button id="btn-pay" onclick="posApp.processPayment()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-brand-500/30 flex justify-center items-center gap-2 opacity-50 cursor-not-allowed" disabled>
+                            <i class="fas fa-check-circle"></i> Selesaikan Pembayaran
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="harga" class="py-20 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-slate-900 mb-4">Investasi Bisnis yang Masuk Akal</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Mulai dari nol biaya untuk mencoba, hingga paket pro untuk bisnis yang siap terbang tinggi. Tidak ada biaya tersembunyi.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <!-- Free Tier -->
+                <div class="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm hover:shadow-md transition">
+                    <h3 class="text-2xl font-bold text-slate-900 mb-2">Paket Starter</h3>
+                    <p class="text-slate-500 text-sm mb-6">Sempurna untuk validasi ide bisnis.</p>
+                    <div class="text-4xl font-extrabold text-slate-900 mb-6">Gratis <span class="text-lg text-slate-500 font-medium">selamanya</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-slate-600 text-sm"><i class="fas fa-check text-green-500 mr-3"></i> Maksimal 50 Transaksi/hari</li>
+                        <li class="flex items-center text-slate-600 text-sm"><i class="fas fa-check text-green-500 mr-3"></i> Katalog hingga 20 Produk</li>
+                        <li class="flex items-center text-slate-600 text-sm"><i class="fas fa-check text-green-500 mr-3"></i> Kalkulator Kembalian Otomatis</li>
+                        <li class="flex items-center text-slate-400 text-sm"><i class="fas fa-times mr-3"></i> Laporan Penjualan Harian (Tidak ada)</li>
+                    </ul>
+                    <button class="w-full bg-slate-100 hover:bg-slate-200 text-slate-800 font-semibold py-3 rounded-xl transition">
+                        Gunakan Sekarang
+                    </button>
+                </div>
+
+                <!-- Pro Tier -->
+                <div class="bg-brand-900 rounded-2xl border border-brand-800 p-8 shadow-xl relative transform md:-translate-y-4">
+                    <div class="absolute top-0 right-8 transform -translate-y-1/2">
+                        <span class="bg-gradient-to-r from-brand-400 to-blue-300 text-brand-900 text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full">Paling Diminati</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">Paket Pro</h3>
+                    <p class="text-brand-200 text-sm mb-6">Untuk UMKM yang ingin tumbuh cepat.</p>
+                    <div class="text-4xl font-extrabold text-white mb-6">Rp 49rb <span class="text-lg text-brand-300 font-medium">/bulan</span></div>
+                    <ul class="space-y-4 mb-8">
+                        <li class="flex items-center text-brand-100 text-sm"><i class="fas fa-check text-brand-400 mr-3"></i> Transaksi Tanpa Batas</li>
+                        <li class="flex items-center text-brand-100 text-sm"><i class="fas fa-check text-brand-400 mr-3"></i> Katalog Produk Tanpa Batas</li>
+                        <li class="flex items-center text-brand-100 text-sm"><i class="fas fa-check text-brand-400 mr-3"></i> Manajemen Stok (Inventory)</li>
+                        <li class="flex items-center text-brand-100 text-sm"><i class="fas fa-check text-brand-400 mr-3"></i> Analitik & Laporan Penjualan (PDF/Excel)</li>
+                    </ul>
+                    <button class="w-full bg-brand-500 hover:bg-brand-400 text-white font-semibold py-3 rounded-xl transition shadow-lg shadow-brand-500/20">
+                        Coba Pro Gratis 14 Hari
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-slate-200 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center gap-2 mb-4 md:mb-0">
+                <div class="w-6 h-6 bg-brand-600 rounded flex items-center justify-center text-white font-bold text-xs">i</div>
+                <span class="font-bold text-lg text-slate-900">ItemBelanja</span>
+            </div>
+            <p class="text-slate-500 text-sm">
+                &copy; 2023 ItemBelanja. Prototipe Karya Siswa SMK.
+            </p>
+            <div class="flex space-x-4 mt-4 md:mt-0 text-slate-400">
+                <a href="#" class="hover:text-brand-600 transition"><i class="fab fa-instagram text-xl"></i></a>
+                <a href="#" class="hover:text-brand-600 transition"><i class="fab fa-twitter text-xl"></i></a>
+                <a href="#" class="hover:text-brand-600 transition"><i class="fab fa-github text-xl"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript OOP Implementation -->
+    <script>
+        /**
+         * Class Item mewakili struktur data satu barang
+         */
+        class Item {
+            constructor(id, name, price) {
+                this.id = id;
+                this.name = name;
+                this.price = parseInt(price);
+            }
+        }
+
+        /**
+         * Class CartItem mewakili barang yang ada di dalam keranjang
+         * Memiliki properti kuantitas (jumlah)
+         */
+        class CartItem {
+            constructor(item) {
+                this.item = item;
+                this.quantity = 1;
+            }
+
+            increment() {
+                this.quantity++;
+            }
+
+            decrement() {
+                if (this.quantity > 1) {
+                    this.quantity--;
+                    return true;
+                }
+                return false;
+            }
+
+            getSubtotal() {
+                return this.item.price * this.quantity;
+            }
+        }
+
+        /**
+         * Class POSSystem mengatur seluruh logika Point of Sale
+         * Mengelola keranjang, kalkulasi, dan interaksi dengan UI DOM
+         */
+        class POSSystem {
+            constructor() {
+                this.cart = []; // Array of CartItem objects
+                this.total = 0;
+                
+                // Caching DOM elements untuk performa
+                this.cartContainer = document.getElementById('cart-items');
+                this.totalDisplay = document.getElementById('cart-total');
+                this.paymentInput = document.getElementById('payment-amount');
+                this.changeContainer = document.getElementById('change-container');
+                this.changeDisplay = document.getElementById('change-amount');
+                this.btnPay = document.getElementById('btn-pay');
+                
+                this.setupEventListeners();
+            }
+
+            // Fungsi Bantuan: Format Rupiah
+            formatRupiah(number) {
+                return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(number);
+            }
+
+            // Setup event listeners pada form dan input
+            setupEventListeners() {
+                // Form submit untuk item manual
+                document.getElementById('custom-item-form').addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const nameInput = document.getElementById('item-name');
+                    const priceInput = document.getElementById('item-price');
+                    
+                    if(nameInput.value && priceInput.value) {
+                        this.addToCart(nameInput.value, priceInput.value);
+                        // Reset form
+                        nameInput.value = '';
+                        priceInput.value = '';
+                        nameInput.focus();
+                    }
+                });
+
+                // Listen perubahan pada input pembayaran
+                this.paymentInput.addEventListener('input', () => {
+                    this.calculateChange();
+                });
+            }
+
+            // Tambah barang ke keranjang
+            addToCart(name, price) {
+                // Generate ID sederhana dari nama (huruf kecil tanpa spasi)
+                const id = name.toLowerCase().replace(/\s+/g, '-');
+                
+                // Cek apakah barang sudah ada di keranjang
+                const existingCartItem = this.cart.find(ci => ci.item.id === id);
+                
+                if (existingCartItem) {
+                    existingCartItem.increment();
+                } else {
+                    const newItem = new Item(id, name, price);
+                    this.cart.push(new CartItem(newItem));
+                }
+                
+                this.updateUI();
+                
+                // Feedback visual kecil (opsional, bisa dengan alert kustom atau toast)
+                // Di sini kita biarkan mengandalkan perubahan UI langsung
+            }
+
+            // Hapus atau kurangi barang dari keranjang
+            removeItem(id) {
+                const index = this.cart.findIndex(ci => ci.item.id === id);
+                if (index !== -1) {
+                    this.cart.splice(index, 1);
+                    this.updateUI();
+                }
+            }
+            
+            updateQuantity(id, delta) {
+                const cartItem = this.cart.find(ci => ci.item.id === id);
+                if (cartItem) {
+                    if (delta > 0) {
+                        cartItem.increment();
+                    } else if (delta < 0) {
+                        const canDecrement = cartItem.decrement();
+                        if (!canDecrement) {
+                            this.removeItem(id);
+                            return; // Keluar awal karena UI akan diupdate di removeItem
+                        }
+                    }
+                    this.updateUI();
+                }
+            }
+
+            // Kosongkan keranjang
+            clearCart() {
+                this.cart = [];
+                this.paymentInput.value = '';
+                this.changeContainer.classList.add('hidden');
+                this.updateUI();
+            }
+
+            // Hitung total belanja
+            calculateTotal() {
+                this.total = this.cart.reduce((sum, cartItem) => sum + cartItem.getSubtotal(), 0);
+                return this.total;
+            }
+
+            // Hitung kembalian secara real-time
+            calculateChange() {
+                const paymentStr = this.paymentInput.value;
+                const payment = parseInt(paymentStr) || 0;
+                
+                if (this.total === 0) {
+                    this.btnPay.disabled = true;
+                    this.btnPay.classList.add('opacity-50', 'cursor-not-allowed');
+                    this.changeContainer.classList.add('hidden');
+                    return;
+                }
+
+                if (payment >= this.total) {
+                    // Cukup uang
+                    const change = payment - this.total;
+                    this.changeDisplay.innerText = this.formatRupiah(change);
+                    this.changeContainer.classList.remove('hidden');
+                    
+                    // Enable tombol bayar
+                    this.btnPay.disabled = false;
+                    this.btnPay.classList.remove('opacity-50', 'cursor-not-allowed');
+                } else {
+                    // Uang kurang
+                    this.changeContainer.classList.add('hidden');
+                    this.btnPay.disabled = true;
+                    this.btnPay.classList.add('opacity-50', 'cursor-not-allowed');
+                }
+            }
+
+            // Simulasi proses pembayaran
+            processPayment() {
+                if (this.total === 0) return;
+                
+                const payment = parseInt(this.paymentInput.value) || 0;
+                if (payment >= this.total) {
+                    const change = payment - this.total;
+                    
+                    // Tampilkan sukses (Gunakan UI Element, bukan alert native)
+                    this.cartContainer.innerHTML = `
+                        <div class="flex flex-col items-center justify-center h-full text-center fade-in">
+                            <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center text-3xl mb-4">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <h4 class="text-xl font-bold text-slate-800 mb-2">Pembayaran Berhasil!</h4>
+                            <p class="text-slate-500 text-sm mb-1">Total: ${this.formatRupiah(this.total)}</p>
+                            <p class="text-slate-500 text-sm mb-4">Kembalian: <span class="font-bold text-slate-800">${this.formatRupiah(change)}</span></p>
+                            <button onclick="posApp.clearCart()" class="bg-brand-100 text-brand-700 px-4 py-2 rounded-lg font-medium text-sm hover:bg-brand-200 transition">Transkasi Baru</button>
+                        </div>
+                    `;
+                    
+                    // Sembunyikan checkout area untuk sementara sampai transaksi baru
+                    this.totalDisplay.innerText = "Rp 0";
+                    this.paymentInput.value = '';
+                    this.changeContainer.classList.add('hidden');
+                    this.btnPay.disabled = true;
+                    this.btnPay.classList.add('opacity-50', 'cursor-not-allowed');
+                    this.total = 0; // Reset internal state tapi biarkan cart array utuh sampai di clear
+                }
+            }
+
+            // Render ulang tampilan keranjang
+            updateUI() {
+                this.calculateTotal();
+                this.totalDisplay.innerText = this.formatRupiah(this.total);
+                
+                if (this.cart.length === 0) {
+                    this.cartContainer.innerHTML = `
+                        <div class="flex flex-col items-center justify-center h-full text-slate-400 text-center">
+                            <i class="fas fa-shopping-basket text-4xl mb-3 opacity-50"></i>
+                            <p class="text-sm">Keranjang masih kosong.<br>Pilih produk di sebelah kiri.</p>
+                        </div>
+                    `;
+                    this.paymentInput.value = '';
+                    this.paymentInput.disabled = true;
+                } else {
+                    this.paymentInput.disabled = false;
+                    this.cartContainer.innerHTML = ''; // Clear current HTML
+                    
+                    this.cart.forEach(cartItem => {
+                        const itemHTML = `
+                            <div class="flex justify-between items-center p-3 bg-white border border-slate-100 rounded-xl shadow-sm fade-in">
+                                <div class="flex-1">
+                                    <div class="font-semibold text-slate-800 text-sm">${cartItem.item.name}</div>
+                                    <div class="text-brand-600 text-xs font-medium">${this.formatRupiah(cartItem.item.price)}</div>
+                                </div>
+                                
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center bg-slate-100 rounded-lg">
+                                        <button onclick="posApp.updateQuantity('${cartItem.item.id}', -1)" class="w-7 h-7 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-slate-200 rounded-l-lg transition">
+                                            <i class="fas fa-minus text-xs"></i>
+                                        </button>
+                                        <span class="w-8 text-center text-sm font-semibold text-slate-700">${cartItem.quantity}</span>
+                                        <button onclick="posApp.updateQuantity('${cartItem.item.id}', 1)" class="w-7 h-7 flex items-center justify-center text-slate-500 hover:text-brand-600 hover:bg-slate-200 rounded-r-lg transition">
+                                            <i class="fas fa-plus text-xs"></i>
+                                        </button>
+                                    </div>
+                                    <div class="w-20 text-right font-bold text-slate-800 text-sm">
+                                        ${this.formatRupiah(cartItem.getSubtotal())}
+                                    </div>
+                                    <button onclick="posApp.removeItem('${cartItem.item.id}')" class="text-slate-300 hover:text-red-500 transition px-1">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        this.cartContainer.insertAdjacentHTML('beforeend', itemHTML);
+                    });
+                }
+                
+                // Evaluasi ulang logic kembalian tiap ada update
+                this.calculateChange();
+            }
+        }
+
+        // Inisialisasi Aplikasi saat halaman selesai dimuat
+        let posApp;
+        document.addEventListener('DOMContentLoaded', () => {
+            posApp = new POSSystem();
+        });
+    </script>
+</body>
+</html>
